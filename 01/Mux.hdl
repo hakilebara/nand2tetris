@@ -2,7 +2,7 @@
 // and the book "The Elements of Computing Systems"
 // by Nisan and Schocken, MIT Press.
 // File name: projects/1/Mux.hdl
-/** 
+/**
  * Multiplexor:
  * if (sel = 0) out = a, else out = b
  */
@@ -11,8 +11,8 @@ CHIP Mux {
     OUT out;
 
     PARTS:
-    And(a= a, b= sel, out= aAndsel);
-    Xor(a= a, b= aAndsel, out= aXoraAndsel);
+    Not(in= sel, out= notsel);
+    And(a= a, b= notsel, out= aAndNotsel);
     And(a= b, b= sel, out= bAndsel);
-    Xor(a= aXoraAndsel, b= bAndsel, out= out);
+    Or(a= aAndNotsel, b= bAndsel, out= out);
 }
